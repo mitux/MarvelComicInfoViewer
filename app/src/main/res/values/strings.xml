@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Marvel Comic Info Viewer</string>
+    <string name="comic_details_activity">Details</string>
 </resources>

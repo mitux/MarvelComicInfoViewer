@@ -1,9 +1,12 @@
 package com.example.a630703.marvelcomicinfoviewer;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefresh;
 
-    GetComicDetailsUseCase getComicDetailsUseCase = null;
     GetComicListUseCase getComicListUseCase = null;
     ComicDB comicDB;
     ComicListDB comicListDB;
@@ -70,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
         ComicEntityDataMapper comicEntityDataMapper = new ComicEntityDataMapper();
         ComicBasicEntityDataMapper comicBasicEntityDataMapper = new ComicBasicEntityDataMapper();
-        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(this.getApplicationContext(), comicDB, comicListDB);
+        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(
+                this.getApplicationContext(), comicDB, comicListDB);
 
-        ComicRepository comicRepository = ComicDataRepository.getInstance(comicDataStoreFactory, comicEntityDataMapper, comicBasicEntityDataMapper);
+        ComicRepository comicRepository = ComicDataRepository.getInstance(comicDataStoreFactory,
+                comicEntityDataMapper, comicBasicEntityDataMapper);
 
-        getComicDetailsUseCase = new GetComicDetailsUseCaseImpl(comicRepository,threadExecutor,postExecutionThread);
+
         getComicListUseCase = new GetComicListUseCaseImpl(comicRepository,threadExecutor,postExecutionThread);
 
 
@@ -113,8 +117,21 @@ public class MainActivity extends AppCompatActivity {
 
                 ComicAdapter comicAdapter = new ComicAdapter(MainActivity.this, comicBasicModels);
                 comicListView.setAdapter(comicAdapter);
+                initListView();
                 swipeRefresh.setRefreshing(false);
             }
         }
     };
+
+    private void initListView() {
+        comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemId = (int) parent.getItemIdAtPosition(position);
+                Intent myIntent = new Intent(MainActivity.this, ComicDetailsActivity.class);
+                myIntent.putExtra("id", itemId); //Optional parameters
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
 }

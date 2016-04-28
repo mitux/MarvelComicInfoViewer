@@ -51,7 +51,7 @@ public class ComicListDBImpl implements ComicListDB {
     @Override
     public boolean requireUpdate() {
         boolean requireUpdate = false;
-        if (getTimestampDiff()>30){
+        if (getTimestampDiff()>10*60){
             requireUpdate = true;
         }
         return requireUpdate;

@@ -45,7 +45,7 @@ public class ComicAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return this.comicsCollecion.get(position).getId();
     }
 
     @Override

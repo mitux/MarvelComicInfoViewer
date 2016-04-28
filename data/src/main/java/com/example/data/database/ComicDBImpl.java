@@ -36,7 +36,7 @@ public class ComicDBImpl implements ComicDB {
         ComicEntityDB comicEntityDB = realm.where(ComicEntityDB.class).equalTo("id",id).findFirst();
         ComicEntity comicEntity = comicEntityRealmMapper.transformToComicEntity(comicEntityDB);
         comicDBCallback.onComicEntityDBLoaded(comicEntity);
-        realm.close();
+
     }
 
     @Override
@@ -59,7 +59,6 @@ public class ComicDBImpl implements ComicDB {
             realm.commitTransaction();
         }
 
-        realm.close();
     }
 
     @Override
@@ -70,7 +69,6 @@ public class ComicDBImpl implements ComicDB {
                 .equalTo("id", id);
 
         boolean exist = query.count() != 0;
-        realm.close();
         return exist;
     }
 
@@ -83,11 +81,9 @@ public class ComicDBImpl implements ComicDB {
         ComicEntityDB comicEntityDB = realm.where(ComicEntityDB.class)
                 .equalTo("id", id).findFirst();
 
-        if (getTimestampDiff(comicEntityDB.getTimestamp())>(10*60)){
+        if (getTimestampDiff(comicEntityDB.getTimestamp())>(24*3600)){
             requireUpdate = true;
         }
-
-        realm.close();
 
         return requireUpdate;
     }
@@ -109,6 +105,5 @@ public class ComicDBImpl implements ComicDB {
         realm.clear(ComicEntityDB.class);
         realm.commitTransaction();
 
-        realm.close();
     }
 }

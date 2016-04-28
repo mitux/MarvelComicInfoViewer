@@ -25,9 +25,9 @@ public class ComicEntityPojoMapper {
         for (ItemCreatorPojo itemCh : comicPojo.getCreators().getItems()){
             String name = itemCh.getName();
             String role = itemCh.getRole();
-            characters.add(name+" ("+role+")");
+            creators.add(name+" ("+role+")");
         }
-        comicEntity.setCharacters(creators);
+        comicEntity.setCreators(creators);
 
         String thumbnailPath = comicPojo.getThumbnail().getPath();
         String thumbnailExtension = comicPojo.getThumbnail().getExtension();

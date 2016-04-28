@@ -33,8 +33,11 @@ public interface RestApi {
 
     static final String[] ORDERBY = {"focDate","onsaleDate","title","issueNumber","modified"};
 
-    @GET("/comics/{id}?ts="+TS+"&apikey="+APIKEY+"&hash={hash}")
-    public void getComicFeed(@Path("id") int id, @Path("hash") String hash, Callback<ResultPojo> response);
+    @GET("/comics/{id}?ts="+TS+"&apikey="+APIKEY)
+    public void getComicFeed(@Path("id") int id, @Query("hash") String hash, Callback<ResultPojo> response);
+
+//    @GET("/comics/{id}?ts="+TS+"&apikey="+APIKEY)
+//    public void getComicFeed(@Path("id") int id, @Query("hash") String hash, Callback<ResultPojo> response);
 
 //    @GET("/comics?characters="+HULKID+"&orderBy={orderBy}&ts="+TS+"&apikey="+APIKEY+"&hash={hash}")
 //    public void getListFeed(@Path("orderBy") String orderBy, @Path("hash") String hash, Callback<ResultPojo> response);
