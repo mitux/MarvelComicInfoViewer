@@ -24,7 +24,7 @@ public class ComicDBImpl implements ComicDB {
     private final RealmConfiguration realmConfig;
 
     public ComicDBImpl (Context context, ComicEntityRealmMapper comicEntityRealmMapper){
-        realmConfig = new RealmConfiguration.Builder(context).build();
+        realmConfig = new RealmConfiguration.Builder(context).deleteRealmIfMigrationNeeded().build();
 
         this.comicEntityRealmMapper = comicEntityRealmMapper;
         this.context = context;

@@ -1,4 +1,4 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.example.a630703.marvelcomicinfoviewer.R;
+import com.example.a630703.marvelcomicinfoviewer.model.ComicBasicModel;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.Collection;
 import java.util.List;
@@ -64,7 +65,8 @@ public class ComicAdapter extends BaseAdapter {
         }
 
         ComicBasicModel comicBasicModel = this.comicsCollecion.get(position);
-        Glide.with(context).load(comicBasicModel.getThumbnail()).into(comicViewHolder.thumbnail);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage(comicBasicModel.getThumbnail(), comicViewHolder.thumbnail);
 
         return convertView;
     }

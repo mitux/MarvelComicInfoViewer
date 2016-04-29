@@ -1,6 +1,7 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.mapper;
 
 import com.example.ComicBasic;
+import com.example.a630703.marvelcomicinfoviewer.model.ComicBasicModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class ComicBasicModelDataMapper {
         return comicBasicModel;
     }
 
-    Collection<ComicBasicModel> transform (ArrayList<ComicBasic> comicBasics){
+    public Collection<ComicBasicModel> transform(ArrayList<ComicBasic> comicBasics){
         Collection<ComicBasicModel> comicBasicModels = new ArrayList<>();
         for (ComicBasic comicBasic : comicBasics){
             comicBasicModels.add(transform(comicBasic));

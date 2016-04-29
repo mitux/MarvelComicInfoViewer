@@ -1,4 +1,4 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.view;
 
 import android.os.Handler;
 import android.os.Looper;

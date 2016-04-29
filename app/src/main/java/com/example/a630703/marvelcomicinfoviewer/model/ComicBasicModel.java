@@ -1,4 +1,4 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.model;
 
 /**
  * Created by a630703 on 27/04/2016.

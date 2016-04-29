@@ -1,19 +1,25 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.view.activity;
+
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.Comic;
 import com.example.ComicBasic;
+import com.example.a630703.marvelcomicinfoviewer.view.adapter.ComicAdapter;
+import com.example.a630703.marvelcomicinfoviewer.R;
+import com.example.a630703.marvelcomicinfoviewer.mapper.ComicBasicModelDataMapper;
+import com.example.a630703.marvelcomicinfoviewer.model.ComicBasicModel;
+import com.example.a630703.marvelcomicinfoviewer.view.UIThread;
 import com.example.data.database.ComicDB;
 import com.example.data.database.ComicDBImpl;
 import com.example.data.database.ComicListDB;
@@ -27,15 +33,14 @@ import com.example.data.repository.ComicDataRepository;
 import com.example.data.repository.ComicDataStoreFactory;
 import com.example.executor.PostExecutionThread;
 import com.example.executor.ThreadExecutor;
-import com.example.interactor.GetComicDetailsUseCase;
-import com.example.interactor.GetComicDetailsUseCaseImpl;
 import com.example.interactor.GetComicListUseCase;
 import com.example.interactor.GetComicListUseCaseImpl;
 import com.example.repository.ComicRepository;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
+
+        ActionBar bar = this.getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffef0000")));
 
         ButterKnife.bind(this);
 

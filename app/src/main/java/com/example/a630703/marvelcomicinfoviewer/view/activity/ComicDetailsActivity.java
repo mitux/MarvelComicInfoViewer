@@ -1,18 +1,22 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.view.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.Comic;
-import com.example.ComicBasic;
+import com.example.a630703.marvelcomicinfoviewer.R;
+import com.example.a630703.marvelcomicinfoviewer.mapper.ComicModelDataMapper;
+import com.example.a630703.marvelcomicinfoviewer.model.ComicModel;
+import com.example.a630703.marvelcomicinfoviewer.view.UIThread;
 import com.example.data.database.ComicDB;
 import com.example.data.database.ComicListDB;
 import com.example.data.database.ComicListDBImpl;
@@ -26,11 +30,10 @@ import com.example.executor.PostExecutionThread;
 import com.example.executor.ThreadExecutor;
 import com.example.interactor.GetComicDetailsUseCase;
 import com.example.interactor.GetComicDetailsUseCaseImpl;
-import com.example.interactor.GetComicListUseCase;
 import com.example.repository.ComicRepository;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,6 +79,9 @@ public class ComicDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.comic_details_activity);
+
+        ActionBar bar = this.getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffef0000")));
 
         ButterKnife.bind(this);
 
@@ -178,7 +184,8 @@ public class ComicDetailsActivity extends AppCompatActivity {
 
             priceTv.setText(comicModel.getPrice()+"$");
 
-            Glide.with(ComicDetailsActivity.this).load(comicModel.getThumbnail()).into(thumbnail);
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.displayImage(comicModel.getThumbnail(),thumbnail);
         }
 
     };

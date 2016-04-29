@@ -1,6 +1,7 @@
-package com.example.a630703.marvelcomicinfoviewer;
+package com.example.a630703.marvelcomicinfoviewer.mapper;
 
 import com.example.Comic;
+import com.example.a630703.marvelcomicinfoviewer.model.ComicModel;
 
 /**
  * Created by a630703 on 27/04/2016.
